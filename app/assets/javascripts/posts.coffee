@@ -4,11 +4,12 @@
 $(document).ready ->
     base = 'http://api.tumblr.com/v2'
     user = 'mountainsforbreakfast.tumblr.com'
-    api_key = $('#keys').data('consumerKey')
+    api_key = $('#keys').data('Key')
     $('#get_posts').on 'click', ->
         $.ajax "#{baseUrl}/blog/#{user}/posts",
             type: 'GET'
             data: api_key: api_key
             dataType: 'jsonp'
             success: (data) ->
-              debugger
+              for post in data.response.posts
+                $('.posts').append "<li><h2>#{post.title}</h2>#{post.body}</li>"
